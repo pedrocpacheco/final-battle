@@ -1,0 +1,82 @@
+.meio{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  padding-left: 80;
+  padding-right: 80;
+  margin-top: 30px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  align-items: center;
+}
+
+.card span{
+  color: #2762CA;
+}
+
+.card-cima{
+  margin-top: 5px;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.card-cima img{
+  width: 100px;
+}
+
+.card-meio{
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.card-meio-esq{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linha{
+  height: 50px;
+}
+
+.card-meio-dir{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meio button{
+  color: white;
+  background-color: #00A1FA;
+  border: #00A1FA solid 1px;
+  width: 52vw;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.footer {
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer p{
+  font-weight: bold;
+  color: #B9C6CE;
+  font-size: 12px;
+}

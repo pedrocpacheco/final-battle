@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:700,400");
+
+* {
+  font-family: "Inter";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.top{
+  background-color: #2762CA;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  width: 100%;
+  padding-right: 20px;
+}
+
+
+.top-cima{
+  display: flex;
+  flex-direction: row;
+  gap: 160px;
+  align-items: center;
+  justify-content: center;
+}
+
+.infos-top-cima{
+  display: flex;
+  gap: 20px;
+}
+
+.infos-top-cima img{
+  width: 80px;
+}
+
+.infos-top-cima h3{
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+
+.infos-top-cima p{
+  color: white;
+  font-size: 20px;
+  width: fit-content;
+}
+
+.textos-top-cima{
+  margin-top: -5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: fit-content;
+}
+
+.textos-top-cima h3{
+  width: fit-content;
+}
+
+.sair{
+  width: 40px;
+}
+
+hr{
+  margin-top: 40px;
+  margin-bottom: 30px;
+  height: 4px;
+  background-color: white;
+
+}
+
+.top-baixo{
+  margin-bottom: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+
+.top-baixo h3{
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.top-baixo img{
+  width: 60px;
+}
+
+.botoes-header{
+  display: flex;
+  gap: 30px;
+}

@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:700,400");
+
+* {
+  font-family: "Inter";
+}
+
+.logo-fundo {
+  background-image: url("img/fundos/caloi.png");
+  width: 100vw;
+  margin-top: -8px;
+  margin-left: -8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
+
+.logo-fundo img{
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 100px;
+  width: 30px;
+}  
+
+.main{
+  margin: 20px;
+  margin-top: px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bici span{
+  color: #2762CA;
+}
+
+.bici h4{
+  margin-top: -23px;
+  color: #2762CA;
+}
+
+
+.pessoa{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
+.pessoa img{
+  width: 60px;
+  height: 60px;
+}
+
+.pessoa h2{
+  color: #00A1FA;
+}
+
+.preco{
+  margin-top: -8px;
+  color: #0F9F1E;
+}
+
+.mods{
+  margin-top: -13px;
+}
+
+.mods-titulo{
+  color: #515151;
+  margin-bottom: -16px;
+}
+
+.mod{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.mod img{
+  width: 140px;
+  height: 140px;
+  margin-right: -30px;
+}
+
+.mod-infos h3{
+  font-size: 18px;
+}
+
+.mod-infos h4{
+  margin-top: -16px;
+  color: #0046C0;
+}
+
+.mod-infos p{
+  font-size: 13px;
+  margin-top: -15px;
+  color: #515151;
+}
+
+.mod-infos h2{
+  color: #0F9F1E;
+  margin-top: -8px;
+}
+
+.mod{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid black;
+}
+
+button{
+  margin-top: 20px;
+  color: white;
+  background-color: #00A1FA;
+  border: #00A1FA solid 1px;
+  width: 52vw;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 400px;
+  height: 55px;
+  font-size: 24px;
+  margin-bottom: 5px;
+}

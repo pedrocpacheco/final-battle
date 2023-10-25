@@ -76,7 +76,7 @@ html, body {
 input {
   text-align: center;
   padding: 5px;
-  border: 2px black solid;
+  border: 3px black solid;
   border-radius: 5px;
   background-color: #EBF9FF;
   width: 50vw;
