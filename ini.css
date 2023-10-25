@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:700,400");
+
+*{
+  font-family: "Inter";
+}
+
+.bodo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+}
+
+.top{
+  margin-top: 30px;
+  margin-bottom: 15vh;
+  text-align: center;
+}
+
+.top p{
+  font-weight: bold;
+  color: #B9C6CE;
+  width: 80vw;
+  font-size: 12px;
+}
+
+.mid {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15vh;
+}
+
+.logo{
+  width: 250px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.form-api {
+  gap: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-api button{
+  margin-top: -5px;
+  color: white;
+  background-color: #2762CA;
+  border: #2762CA solid 1px;
+  width: 52vw;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.link{
+  margin-top: -10px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #00A1FA;
+}
+
+input{
+  text-align: center;
+  padding: 5px;
+  border: 2px black solid;
+  border-radius: 5px;
+  background-color: #EBF9FF;
+  width: 50vw;
+}
+
+
+.back{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.back button{
+  margin-top: 20px;
+  background-color: white;
+  color: #00A1FA;
+  border: #00A1FA solid 4px;
+  width: 52vw;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 1px;
+  margin-bottom: -10px;
+}
+
+.back img{
+  width: 80px;
+}
