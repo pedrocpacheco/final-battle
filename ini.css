@@ -1,29 +1,43 @@
 @import url("https://fonts.googleapis.com/css?family=Inter:700,400");
 
-*{
+* {
   font-family: "Inter";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
 }
 
 .bodo {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   height: 100%;
 }
 
-.top{
-  margin-top: 30px;
-  margin-bottom: 15vh;
+.logo{
+  width: 250px;
+  margin-bottom: -120px;
+}
+
+.top {
+  margin-top: 15px;
   text-align: center;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .top p{
   font-weight: bold;
   color: #B9C6CE;
-  width: 80vw;
   font-size: 12px;
 }
+
+
 
 .mid {
   text-align: center;
@@ -31,13 +45,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15vh;
-}
-
-.logo{
-  width: 250px;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  gap: 15vh;
 }
 
 .form-api {
@@ -45,11 +53,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.form-api button{
-  margin-top: -5px;
+.form-api button {
   color: white;
   background-color: #2762CA;
   border: #2762CA solid 1px;
@@ -57,18 +63,17 @@
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px;
 }
 
-.link{
-  margin-top: -10px;
+.link {
   font-weight: bold;
   font-size: 13px;
   color: #00A1FA;
+  cursor: pointer;
 }
 
-input{
+input {
   text-align: center;
   padding: 5px;
   border: 2px black solid;
@@ -77,17 +82,17 @@ input{
   width: 50vw;
 }
 
-
-.back{
+.back {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-around;
+  padding: 20px;
+  margin-bottom: 15px;
 }
 
-.back button{
-  margin-top: 20px;
+.back button {
   background-color: white;
   color: #00A1FA;
   border: #00A1FA solid 4px;
@@ -96,9 +101,9 @@ input{
   cursor: pointer;
   font-weight: bold;
   padding: 1px;
-  margin-bottom: -10px;
+  margin-bottom: 15px;
 }
 
-.back img{
+.back img {
   width: 80px;
 }
