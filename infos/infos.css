@@ -5,7 +5,7 @@
 }
 
 .logo-fundo {
-  background-image: url("img/fundos/caloi.png");
+  background-image: url("../img/fundos/caloi.png");
   width: 100vw;
   margin-top: -8px;
   margin-left: -8px;
@@ -102,7 +102,7 @@
 
 .mod-infos h2{
   color: #0F9F1E;
-  margin-top: -8px;
+  margin-top: 4px;
 }
 
 .mod{
@@ -124,4 +124,16 @@ button{
   height: 55px;
   font-size: 24px;
   margin-bottom: 5px;
+}
+
+.card-imagens{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+
+.card-imagens img{
+  width: 160px;
 }

@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:700,400");
+
+* {
+  font-family: "Inter";
+}
+
+main{
+  margin-right: 30px;
+}
+
+body{
+  background-color: #2762CA;
+  margin-top: 40px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.botoes{
+  display: flex;
+  gap: 80vw;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+.saida{
+  width: 20px;
+}
+
+.fechada{
+  width: 25px;
+}
+
+.top{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-infos{
+  margin-left: -90px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.top-infos h2{
+  color: white;
+}
+
+.top-infos p{
+  color: white;
+  margin-top: -14px;
+  font-size: 16px;
+}
+
+.meio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.meio img{
+  margin-top: 40px;
+  margin-bottom: 30px;
+  width: 450px;
+}
+
+ul{
+  margin-left: -20px;
+}
+
+.topico{
+  color: white;
+}
+
+
+li{
+  color: white;
+  margin-top: 20px;
+  width: 84vw;
+}
+
+
+button{
+  margin-top: 20px;
+  color: white;
+  background-color: #00A1FA;
+  border: #00A1FA solid 1px;
+  width: 52vw;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 500px;
+  height: 80px;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.botao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer{
+  margin-top: 15px;
+  text-align: center;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+footer{
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 12px;
+}
