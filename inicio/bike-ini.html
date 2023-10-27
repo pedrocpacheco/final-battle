@@ -4,25 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="ini.css">
-  <title>Document</title>
+  <title>Bike Now | Login Ciclista</title>
 </head>
 <body class="bodo">
   <div class="top">
     <p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
-      LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
+      LAYOUT MAY VARY ACROSS PLATFORMS.</p>
   </div>
   <div class="mid">
-    <img src="./img/logo-bike.png" class="logo">
-    <form class="form-api">
-      <input type="text" name="nome" placeholder="Informe o seu CPF">
-      <input type="text" name="senha" placeholder="Informe a sua Senha">
-      <a><button id="atualizar" onclick="form()">Entrar</button></a>
-      <a href="ana-ini.html" class="link">Deseja logar como Analista?</a>
-    </form>
-  </div class="mid">
+    <div class="requisicao">
+      <img src="../img/logo-bike.png" class="logo">
+      <form class="form-api">
+        <input id="cpf" type="text" name="cpf" placeholder="Informe o seu CPF">  <!-- Esse é o campo com o CPF -->
+        <input id="senha" type="password" name="senha" placeholder="Informe a sua Senha"> <!-- Tipo de input alterado para password -->
+      </form>
+      <div class="acessos">
+        <button id="atualizar">Entrar</button>
+        <a href="ana-ini.html" class="link">Deseja logar como Analista?</a>
+      </div>
+    </div>
+    </div>
+  </div>
   <div class="back">
     <a href="https://www.portoseguro.com.br/seguro-bike"><button>Iniciar processo de Seguro</button></a>
-    <img src="img\logo-porto.png">
+    <img src="../img/logo-porto.png">
   </div>
+  <script>
+    document.getElementById("atualizar").addEventListener("click", function () {
+      console.log("teste")
+      const cpf = document.getElementById("cpf").value;
+      const apiUrl = `http://localhost:8080/ciclistas/cpf/${cpf}`;
+      fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const senha = document.getElementById("senha").value;
+        if(data.senha != senha){
+          alert("Senha Incorreta")
+          return
+        }
+
+        window.location.href = `http://127.0.0.1:5500/selec-fotos/bice-1.html?cpf=${cpf}`;
+        
+      }).catch(error => {
+        alert("Não existe nenhum Ciclista com este CPF");
+      });;
+  });
+  </script>
 </body>
 </html>

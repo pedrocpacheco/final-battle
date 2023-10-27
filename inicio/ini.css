@@ -37,8 +37,6 @@ html, body {
   font-size: 12px;
 }
 
-
-
 .mid {
   text-align: center;
   display: flex;
@@ -55,7 +53,7 @@ html, body {
   align-items: center;
 }
 
-.form-api button {
+#atualizar {
   color: white;
   background-color: #2762CA;
   border: #2762CA solid 1px;
@@ -106,4 +104,17 @@ input {
 
 .back img {
   width: 80px;
+}
+
+.acessos{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+.requisicao{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }

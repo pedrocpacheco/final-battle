@@ -7,51 +7,101 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="logo-fundo">
+  <div class="logoFundo">
     <img src="../img/voltar.png" alt="">
   </div>
   <div class="main">
     <div class="bici">
-      <h2>Bicicleta Calloi V3 <span>| 2020</span></h2>
-      <h4>D06T011</h4>
+      <h2>Bicicleta <span class="modelo" id="nome">Calloi V3</span> <span class="ano">| 2020</span></h2>
+      <h4 class="num-serie">D06T011</h4>
       <div class="pessoa">
-        <img src="../img/pessoas/pedro.png" alt="Pedro Pacheco">
-        <h2>Pedro Carvalho Pacheco</h2>
+        <img src="../img/pessoas/pedro.png" class="arredondei" alt="Pedro Pacheco">
+        <h2 class="pessoa-nome">Pedro Carvalho Pacheco</h2>
       </div>
       <p class="desc">Uma bicicleta esportiva com alta performance para atletas profissionais</p>
       <h1 class="preco">R$ 7.900,20</h1>
     </div>
-    <div class="mods">
-      <h2 class="mods-titulo">Modificações da Bicicleta</h2>
-      <div class="mod">
-        <img src="./../img/placeholder/mod.png" alt="">
-        <div class="mod-infos">
-          <h3>Pneu P. Slope</h3>
-          <h4>Specialized</h4>
-          <p>Pneu esportivo para ciclistas que desejam pedalar em localidades instaveis.</p>
-          <h2>R$ 384,20</h2>
-        </div>
-      </div>
-      <div class="mod">
-        <img src="./../img/placeholder/mod.png" alt="">
-        <div class="mod-infos">
-          <h3>Pneu P. Slope</h3>
-          <h4>Specialized</h4>
-          <p>Pneu esportivo para ciclistas que desejam pedalar em localidades instaveis.</p>
-          <h2>R$ 384,20</h2>
-        </div>
-      </div>
-      <div class="mod">
-        <img src="./../img/placeholder/mod.png" alt="">
-        <div class="mod-infos">
-          <h3>Pneu P. Slope</h3>
-          <h4>Specialized</h4>
-          <p>Pneu esportivo para ciclistas que desejam pedalar em localidades instaveis.</p>
-          <h2>R$ 384,20</h2>
-        </div>
-      </div>
+    <div class="mods" id="mods">
+      
     </div>
-    <button>Enviar Fotos</button>
-  </div>
+  <button class="fot">Enviar Fotos</button>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const bicicletaId = urlParams.get("id");
+
+      const apiUrl = `http://localhost:8080/bicicletas/${bicicletaId}`;
+      const logoFundo = document.getElementById("logo-fundo");
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(bicicleta => {
+
+          const biciModelo = document.querySelector(".bici .modelo");
+          const biciAno = document.querySelector(".bici .ano");
+          const biciNumSerie = document.querySelector(".bici .num-serie");
+          const biciPessoaNome = document.querySelector(".bici .pessoa-nome");
+          const biciDesc = document.querySelector(".bici .desc");
+          const biciPreco = document.querySelector(".bici .preco");
+
+
+          logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.image}.png)`;
+          biciModelo.textContent = bicicleta.nome;
+          biciAno.textContent = `| ${bicicleta.ano}`;
+          biciNumSerie.textContent = bicicleta.numSerie;
+          biciPessoaNome.textContent = bicicleta.pessoaNome;
+          biciDesc.textContent = bicicleta.descricao;
+          biciPreco.textContent = `R$ ${bicicleta.price.toFixed(2)}`;
+
+          apiDono = `http://localhost:8080/ciclistas/id/${bicicleta.ciclistaId}`;
+
+          fetch(apiDono)
+          .then(response => response.json())
+          .then(ciclista => {
+            const nomeCiclita = document.querySelector(".pessoa h2");
+            const fotoCiclita = document.querySelector(".pessoa img");
+            console.log(nomeCiclita);
+
+            nomeCiclita.textContent = ciclista.nome;
+            fotoCiclita.src = `${ciclista.img}`;
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao buscar as informações do ciclista:", error);
+          });
+        })
+        .catch(error => {
+          console.error("Ocorreu um erro ao buscar as informações da bicicleta:", error);
+        });
+
+        const apiUrlAddons = `http://localhost:8080/addons/bicicleta/${bicicletaId}`;
+        console.log(`http://localhost:8080/addons/bicicleta/${bicicletaId}`)
+        const modsContainer = document.getElementById("mods");
+
+        fetch(apiUrlAddons)
+          .then(response => response.json())
+          .then(addons => {
+            addons.forEach(addon => {
+              const modElement = document.createElement("div");
+              modElement.classList.add("mod");
+    
+              modElement.innerHTML = `
+                <img src="./../img/placeholder/mod.png" alt="${addon.nome}">
+                <div class="mod-infos">
+                  <h3>${addon.nome}</h3>
+                  <h4>${addon.marca}</h4>
+                  <p>${addon.descricao}</p>
+                  <h2>R$ ${addon.preco.toFixed(2)}</h2>
+                </div>
+              `;
+    
+              modsContainer.appendChild(modElement);
+            });
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao buscar os addons:", error);
+          });
+    });
+  </script>
 </body>
 </html>
