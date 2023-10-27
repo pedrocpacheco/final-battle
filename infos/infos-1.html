@@ -26,17 +26,21 @@
     </div>
   <button class="fot">Enviar Fotos</button>
   <script>
+
     document.addEventListener("DOMContentLoaded", function () {
 
       const urlParams = new URLSearchParams(window.location.search);
       const bicicletaId = urlParams.get("id");
+      const logoFundo = document.querySelector(".logoFundo"); 
+      console.log(logoFundo)
 
       const apiUrl = `http://localhost:8080/bicicletas/${bicicletaId}`;
-      const logoFundo = document.getElementById("logo-fundo");
 
       fetch(apiUrl)
         .then(response => response.json())
         .then(bicicleta => {
+
+          logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.marca}.png)`;
 
           const biciModelo = document.querySelector(".bici .modelo");
           const biciAno = document.querySelector(".bici .ano");
@@ -45,8 +49,6 @@
           const biciDesc = document.querySelector(".bici .desc");
           const biciPreco = document.querySelector(".bici .preco");
 
-
-          logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.image}.png)`;
           biciModelo.textContent = bicicleta.nome;
           biciAno.textContent = `| ${bicicleta.ano}`;
           biciNumSerie.textContent = bicicleta.numSerie;
@@ -101,6 +103,16 @@
           .catch(error => {
             console.error("Ocorreu um erro ao buscar os addons:", error);
           });
+        const enviarFotosButton = document.querySelector(".fot");
+
+        enviarFotosButton.addEventListener("click", function () {
+        // Obtém o ID da bicicleta da URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        const bicicletaId = urlParams.get("id");
+
+        // Redireciona para a página de fotos com o ID da bicicleta
+        window.location.href = `http://127.0.0.1:5500/fotos/foto-1.html?id=${bicicletaId}`;
+});
     });
   </script>
 </body>

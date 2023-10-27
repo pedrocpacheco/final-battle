@@ -28,11 +28,42 @@
       </ul>
     </div>
     <div class="botao">
-      <button>Abrir a Câmera</button>
+      <button>Tirar Foto</button>
+      <video autoplay></video>
+      <canvas></canvas>
     </div>
+    <script>
+      var video = document.querySelector('video');
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+        })
+        .catch(error => {
+          console.log(error);
+        })
+
+      document.querySelector('button').addEventListener('click', () => {
+        var canvas = document.querySelector('canvas');
+        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth;
+        var context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0);
+        
+        // Converter o conteúdo do canvas em uma imagem base64
+        var imageData = canvas.toDataURL('image/png');
+        
+        // Criar um elemento de link para download
+        var link = document.createElement('a');
+        link.href = imageData; // Definir a imagem como URL do link
+        link.download = 'sua_foto.png'; // Nome do arquivo a ser salvo
+        link.click(); // Simular o clique no link para iniciar o download
+      });
+    </script>
   </main>
   <footer>
-    p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
+    DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
       LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
   </footer>
 </body>
