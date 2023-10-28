@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="header.css">
   <link rel="stylesheet" href="meio.css">
-  <title>Document</title>
+  <title>Ciclista | Bicicletas Envio Fotos</title>
 </head>
 <body class="bodo">
   <div class="top">
@@ -63,7 +63,7 @@
             const bicicletasContainer = document.getElementById("meio");
             
             bicicletas.forEach(bicicleta => {
-              if(bicicleta.aceito){
+              if(bicicleta.aceito != null && bicicleta.images != null){
                 return
               }
 
