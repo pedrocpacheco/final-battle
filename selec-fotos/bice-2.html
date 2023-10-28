@@ -11,94 +11,109 @@
   <div class="top">
     <div class="top-cima">
       <div class="infos-top-cima">
-        <img src="../img/logo-bici-pret1.PNG" alt="Logo Logado Ciclista">
+        <img src="../img/logo-bici-pret1.PNG" alt="Logo Logado Ciclista" class="arredondei">
         <div class="textos-top-cima">
           <h3>Olá, Pedro!</h3>
           <p>Usuário Ciclista</p>
         </div>
       </div>
-      <a href="bike-ini.html"><img src="../img/sair.png" class="sair"></a>
+      <a href="../inicio/ana-ini.html"><img src="../img/sair.png" class="sair"></a>
     </div>
     <hr>
     <div class="top-baixo">
       <h3>Envio de Fotos de Suas Bicicletas</h3>
       <div class="botoes-header">
-        <a><img src="../img/cam-blue.png" alt=""></a>
+        <a href="#" id="linkBiceBlue"><img src="../img/cam-blue.png" alt=""></a>
         <a><img src="../img/bici-white.PNG" alt=""></a>
       </div>
     </div>
   </div>
-  <div class="meio">
-    <div class="card">
-      <div class="card-cima">
-        <h3>Modelo: <span>Calloi V3</span></h3>
-        <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-      </div>
-      <div class="card-meio">
-        <div class="card-meio-esq">
-          <h3>Núm. Série: <span>D06T011</span></h3>
-          <h3>Preço: <span>R$7.900,20</span></h3>
-        </div>
-        <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-        <div class="card-mheio-dir">
-          <h3>Modificações: <span>2</span></h3>
-          <h3>Status: <span>Reprovado</span></h3>
-        </div>
-      </div>
-      <div class="card-imagens">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-cima">
-        <h3>Modelo: <span>Calloi V3</span></h3>
-        <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-      </div>
-      <div class="card-meio">
-        <div class="card-meio-esq">
-          <h3>Núm. Série: <span>D06T011</span></h3>
-          <h3>Preço: <span>R$7.900,20</span></h3>
-        </div>
-        <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-        <div class="card-meio-dir">
-          <h3>Modificações: <span>2</span></h3>
-          <h3>Status: <span>Reprovado</span></h3>
-        </div>
-      </div>
-      <div class="card-imagens">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-cima">
-        <h3>Modelo: <span>Calloi V3</span></h3>
-        <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-      </div>
-      <div class="card-meio">
-        <div class="card-meio-esq">
-          <h3>Núm. Série: <span>D06T011</span></h3>
-          <h3>Preço: <span>R$7.900,20</span></h3>
-        </div>
-        <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-        <div class="card-meio-dir">
-          <h3>Modificações: <span>2</span></h3>
-          <h3>Status: <span>Aprovado</span></h3>
-        </div>
-      </div>
-      <div class="card-imagens">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-      </div>
-    </div>
+  <div class="meio" id="meio">
+   
   </div>
   <div class="footer">
     <p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
       LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("oi")
+      function getQueryParam(name) {
+        console.log("Entrei")
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+  
+      const cpf = getQueryParam("cpf");
+      console.log(cpf)
+      const apiUrl = `http://localhost:8080/ciclistas/cpf/${cpf}`;
+      console.log(apiUrl)
+  
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(ciclista => {
+          const logo = document.querySelector(".infos-top-cima img");
+          const nomeElement = document.querySelector(".infos-top-cima h3");
+          logo.src = ciclista.img; 
+          nomeElement.textContent = `Olá, ${ciclista.nome}`; 
+          const apiUrlBicicletas = `http://localhost:8080/bicicletas/ciclista/`
+          
+          fetch(apiUrlBicicletas + ciclista.id)
+          .then(response => response.json())
+          .then(bicicletas => {
+            const bicicletasContainer = document.getElementById("meio");
+            
+            bicicletas.forEach(bicicleta => {
+              if(bicicleta.avaliado == true || bicicleta.images.length <= 0){
+                console.log("GAY" + bicicleta.images.length)
+                return
+              }
+
+              const cardBicicleta = document.createElement("div");
+
+              cardBicicleta.innerHTML = `
+              <a href="${`http://127.0.0.1:5500/infos/infos-2.html?id=${bicicleta.id}&cpf=${cpf}`}">
+                <div class="card">
+                  <div class="card-cima">
+                    <h3>Modelo: <span>${bicicleta.nome}</span></h3>
+                    <img src="../img/marcas-bike/${bicicleta.marca}.png" alt="${bicicleta.marca}">
+                  </div>
+                  <div class="card-meio">
+                    <div class="card-meio-esq">
+                      <h3>Núm. Série: <span>${bicicleta.numSerie}</span></h3>
+                      <h3>Preço: <span>R$ ${bicicleta.price.toFixed(2)}</span></h3>
+                    </div>
+                    <img src="../img/marcas-bike/linha.png" alt="" class="linha">
+                    <div class="card-meio-dir">
+                      <h3>Ano: <span>${bicicleta.ano}</span></h3>
+                      <h3>Status: <span>${bicicleta.aceito}</span></h3>
+                    </div>
+                  </div>
+                  <div class="card-imagens">
+                  ${bicicleta.images.map(image => `<img src="${image}" alt="">`).join("")}
+                  </div>
+                </div> 
+              </a>
+            `;
+
+            bicicletasContainer.appendChild(cardBicicleta);
+            })
+
+            const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+              event.preventDefault(); 
+              const destinoURL = `../selec-fotos/bice-1.html?cpf=${cpf}`;
+              window.location.href = destinoURL;
+            });
+        }).catch(error => {
+          console.error("Ocorreu um erro ao buscar as bicicletas do ciclista:", error);
+        });
+        })
+        .catch(error => {
+          alert("Não foi possível carregar as informações do Ciclista.");
+        });
+    });
+  </script>
+  
 </body>
 </html>

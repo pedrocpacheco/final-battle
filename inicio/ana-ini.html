@@ -4,26 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="ini.css">
-  <title>Bike Now | Login  Analista</title>
+  <title>Bike Now | Login Ciclista</title>
 </head>
 <body class="bodo">
   <div class="top">
     <p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
-      LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
+      LAYOUT MAY VARY ACROSS PLATFORMS.</p>
   </div>
   <div class="mid">
     <img src="../img/logo-nlist.png" class="logo">
-    <form class="form-api">
-      <input type="text" name="nome" placeholder="Informe o seu RM">
-      <input type="text" name="senha" placeholder="Informe a sua Senha">
-      <button><a href="bike-ini.html">Entrar</a></button>
-      <a href="bike-ini.html" class="link">Deseja logar como Ciclista?</a>
-    </form>
-  </div class="mid">
+    <div class="requisicao">
+      <form class="form-api">
+        <input id="rm" type="text" name="rm" placeholder="Informe o seu RM">  <!-- Esse é o campo com o CPF -->
+        <input id="senha" type="password" name="senha" placeholder="Informe a sua Senha"> <!-- Tipo de input alterado para password -->
+      </form>
+      <div class="acessos">
+        <button id="atualizar">Entrar</button>
+        <a href="bike-ini.html" class="link">Deseja logar como Ciclista?</a>
+      </div>
+    </div>
+    </div>
+  </div>
   <div class="back">
     <a href="https://www.portoseguro.com.br/seguro-bike"><button>Iniciar processo de Seguro</button></a>
-    <img src="..\img\logo-porto.png">
+    <img src="../img/logo-porto.png">
   </div>
+  <script>
+    document.getElementById("atualizar").addEventListener("click", function () {
+      console.log("teste")
+      const rm = document.getElementById("rm").value;
+      const apiUrl = `http://localhost:8080/analistas/rm/${rm}`;
+      fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const senha = document.getElementById("senha").value;
+        if(data.senha != senha){
+          alert("Senha Incorreta")
+          return
+        }
+
+        window.location.href = `http://127.0.0.1:5500/selec-fotos/bice-ana.html?rm=${rm}`;
+        
+      }).catch(error => {
+        alert("Não existe nenhum Ciclista com este RM");
+      });;
+  });
+  </script>
 </body>
 </html>
-

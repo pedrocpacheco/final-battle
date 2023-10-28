@@ -17,6 +17,10 @@ body{
   justify-content: center;
 }
 
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
 
 .botoes{
   display: flex;

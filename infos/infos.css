@@ -7,6 +7,7 @@
 .logoFundo {
   background-image: url("../img/fundos/caloi.png");
   width: 100vw;
+  height: 200px;
   margin-top: -8px;
   margin-left: -8px;
   background-position: center;
@@ -127,6 +128,7 @@
 }
 
 .card-imagens{
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -159,14 +161,24 @@
   flex-wrap: wrap;
 }
 
+.bottons{
+  margin-top: 30px;
+}
+
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .bottons button{
   font-size: 15px;
-  height: 30px;
+  height:40px;
   width: 180px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
 }
 
 .verde{

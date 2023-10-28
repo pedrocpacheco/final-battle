@@ -17,14 +17,14 @@
           <p>Usuário Ciclista</p>
         </div>
       </div>
-      <a href="bike-ini.html"><img src="../img/sair.png" class="sair"></a>
+      <a href="../inicio/bike-ini.html"><img src="../img/sair.png" class="sair"></a>
     </div>
     <hr>
     <div class="top-baixo">
       <h3>Envio de Fotos de Suas Bicicletas</h3>
       <div class="botoes-header">
         <a><img src="../img/cam-whiteh.png" alt=""></a>
-        <a><img src="../img/bici-blue.PNG" alt=""></a>
+        <a href="#" id="linkBiceBlue"><img src="../img/bici-blue.PNG" alt=""></a>
       </div>
     </div>
   </div>
@@ -37,9 +37,7 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      console.log("oi")
       function getQueryParam(name) {
-        console.log("Entrei")
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
       }
@@ -65,8 +63,7 @@
             const bicicletasContainer = document.getElementById("meio");
             
             bicicletas.forEach(bicicleta => {
-              if(bicicleta.avaliado == true){
-
+              if(bicicleta.aceito){
                 return
               }
 
@@ -85,8 +82,8 @@
                   </div>
                   <img src="../img/marcas-bike/linha.png" alt="" class="linha">
                   <div class="card-meio-dir">
-                    <h3>Modificações: <span>True</span></h3>
                     <h3>Ano: <span>${bicicleta.ano}</span></h3>
+                    <h3>Status: <span>Pendente</span></h3>
                   </div>
                 </div>
                 <button class="enviar-fotos-button" data-id="${bicicleta.id}">Enviar Fotos</button>
@@ -100,8 +97,15 @@
             enviarFotosButtons.forEach(button => {
               button.addEventListener("click",function() {
                 const bicicletaId = button.getAttribute("data-id");
-                window.location.href = `http://127.0.0.1:5500/infos/infos-1.html?id=${bicicletaId}`;
+                window.location.href = `http://127.0.0.1:5500/infos/infos-1.html?id=${bicicletaId}&cpf=${cpf}`;
               })
+            });
+
+            const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+              event.preventDefault(); 
+              const destinoURL = `../selec-fotos/bice-2.html?cpf=${cpf}`;
+              window.location.href = destinoURL;
             });
         }).catch(error => {
           console.error("Ocorreu um erro ao buscar as bicicletas do ciclista:", error);

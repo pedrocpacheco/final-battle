@@ -8,7 +8,11 @@
 </head>
 <body>
   <div class="logoFundo">
-    <img src="../img/voltar.png" alt="">
+    <a href="#" id="linkBiceBlue">
+    <div>
+      <img src="../img/voltar.png" alt="">
+    </div>
+    </a>
   </div>
   <div class="main">
     <div class="bici">
@@ -26,11 +30,12 @@
     </div>
   <button class="fot">Enviar Fotos</button>
   <script>
-
     document.addEventListener("DOMContentLoaded", function () {
 
       const urlParams = new URLSearchParams(window.location.search);
       const bicicletaId = urlParams.get("id");
+      const cpf = urlParams.get("cpf");
+      console.log(bicicletaId);
       const logoFundo = document.querySelector(".logoFundo"); 
       console.log(logoFundo)
 
@@ -39,6 +44,7 @@
       fetch(apiUrl)
         .then(response => response.json())
         .then(bicicleta => {
+
 
           logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.marca}.png)`;
 
@@ -103,16 +109,19 @@
           .catch(error => {
             console.error("Ocorreu um erro ao buscar os addons:", error);
           });
-        const enviarFotosButton = document.querySelector(".fot");
 
-        enviarFotosButton.addEventListener("click", function () {
-        // Obtém o ID da bicicleta da URL atual
-        const urlParams = new URLSearchParams(window.location.search);
-        const bicicletaId = urlParams.get("id");
-
-        // Redireciona para a página de fotos com o ID da bicicleta
-        window.location.href = `http://127.0.0.1:5500/fotos/foto-1.html?id=${bicicletaId}`;
-});
+          const enviarFotosButton = document.querySelector(".fot");
+          enviarFotosButton.addEventListener("click", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bicicletaId = urlParams.get("id");
+            window.location.href = `http://127.0.0.1:5500/fotos/foto-1.html?id=${bicicletaId}`;
+          });
+          const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            const destinoURL = `../selec-fotos/bice-1.html?cpf=${cpf}`;
+            window.location.href = destinoURL;
+          });
     });
   </script>
 </body>

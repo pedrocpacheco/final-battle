@@ -21,6 +21,11 @@
   color: #2762CA;
 }
 
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .card-cima{
   margin-top: 5px;
   display: flex;

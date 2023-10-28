@@ -11,13 +11,13 @@
   <div class="top">
     <div class="top-cima">
       <div class="infos-top-cima">
-        <img src="../img/logo-an-pret.PNG" alt="Logo Logado Ciclista">
+        <img src="../img/logo-an-pret.PNG" alt="Logo Logado Ciclista" class="arredondei">
         <div class="textos-top-cima">
           <h3>Olá, Pacheco!</h3>
           <p>Usuário Analista</p>
         </div>
       </div>
-      <a href="bike-ini.html"><img src="../img/sair.png" class="sair"></a>
+      <a href="../inicio/ana-ini.html"><img src="../img/sair.png" class="sair"></a>
     </div>
     <hr>
     <div class="top-baixo">
@@ -27,99 +27,96 @@
       </div>
     </div>
   </div>
-  <form action="" class="busca">
-    <input type="text" name="nome" placeholder="Buscar por Nome do Dono"> 
-    <a><img src="../img/voltar-direita.png" alt=""></a>
-  </form>
-  <div class="meio">
-    <a>
-      <div class="card">
-        <div class="dono">
-          <img src="../img/pessoas/pedro.png">
-          <h2>Pedro Carvalho Pacheco</h2>
-        </div>
-        <div class="card-cima">
-          <h3>Modelo: <span>Calloi V3</span></h3>
-          <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-        </div>
-        <div class="card-meio">
-          <div class="card-meio-esq">
-            <h3>Núm. Série: <span>D06T011</span></h3>
-            <h3>Preço: <span>R$7.900,20</span></h3>
-          </div>
-          <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-          <div class="card-mheio-dir">
-            <h3>Modificações: <span>2</span></h3>
-            <h3>Status: <span>Reprovado</span></h3>
-          </div>
-        </div>
-        <div class="card-imagens">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        </div>
-      </div>
-    </a>
-    <a>
-      <div class="card">
-        <div class="dono">
-          <img src="../img/pessoas/pedro.png">
-          <h2>Pedro Carvalho Pacheco</h2>
-        </div>
-        <div class="card-cima">
-          <h3>Modelo: <span>Calloi V3</span></h3>
-          <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-        </div>
-        <div class="card-meio">
-          <div class="card-meio-esq">
-            <h3>Núm. Série: <span>D06T011</span></h3>
-            <h3>Preço: <span>R$7.900,20</span></h3>
-          </div>
-          <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-          <div class="card-mheio-dir">
-            <h3>Modificações: <span>2</span></h3>
-            <h3>Status: <span>Reprovado</span></h3>
-          </div>
-        </div>
-        <div class="card-imagens">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        </div>
-      </div>
-    </a>
-    <a>
-      <div class="card">
-        <div class="dono">
-          <img src="../img/pessoas/pedro.png">
-          <h2>Pedro Carvalho Pacheco</h2>
-        </div>
-        <div class="card-cima">
-          <h3>Modelo: <span>Calloi V3</span></h3>
-          <img src="../img/marcas-bike/caloi.png" alt="Caloi">
-        </div>
-        <div class="card-meio">
-          <div class="card-meio-esq">
-            <h3>Núm. Série: <span>D06T011</span></h3>
-            <h3>Preço: <span>R$7.900,20</span></h3>
-          </div>
-          <img src="../img/marcas-bike/linha.png" alt="" class="linha">
-          <div class="card-mheio-dir">
-            <h3>Modificações: <span>2</span></h3>
-            <h3>Status: <span>Reprovado</span></h3>
-          </div>
-        </div>
-        <div class="card-imagens">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-          <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        </div>
-      </div>
-    </a>    
+  <div class="meio" id="meio">
+   
   </div>
   <div class="footer">
     <p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
       LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+  
+      const rm = getQueryParam("rm");
+      console.log(rm)
+      const apiUrl = `http://localhost:8080/analistas/rm/${rm}`;
+      console.log(apiUrl)
+  
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(analista => {
+          
+          const logo = document.querySelector(".infos-top-cima img");
+          const nomeElement = document.querySelector(".infos-top-cima h3");
+          logo.src = analista.img; 
+          nomeElement.textContent = `Olá, ${analista.nome}`; 
+          const apiBicicletas = `http://localhost:8080/bicicletas`
+          
+          fetch(apiBicicletas)
+          .then(response => response.json())
+          .then(bicicletas => {
+            const bicicletasContainer = document.getElementById("meio");
+            
+            bicicletas.forEach(bicicleta => {
+              if(bicicleta.avaliado == true || bicicleta.images.length <= 0){
+                return
+              }
+              let a = bicicleta.aceito
+              let b = "Opa"
+              if(a === true){ b = "Aceita" }
+              if(a === false) { b = "Rejeitada"}
+
+              const apiUrlBicicletas = `http://localhost:8080/ciclistas/id/`
+              fetch(apiUrlBicicletas + bicicleta.ciclistaId)
+              .then(response => response.json())
+              .then(ciclista =>{
+                const cardBicicleta = document.createElement("div");
+              cardBicicleta.innerHTML = `
+              <a class="link-card" href="${`http://127.0.0.1:5500/infos/infos-3.html?id=${bicicleta.id}&rm=${rm}`}">
+                <div class="card">
+                  <div class="dono">
+                    <img src="${ciclista.img}" class="arredondei">
+                    <h2>${ciclista.nome}</h2>
+                  </div>
+                  <div class="card-cima">
+                    <h3>Modelo: <span>${bicicleta.nome}</span></h3>
+                    <img src="../img/marcas-bike/${bicicleta.marca}.png" alt="${bicicleta.marca}">
+                  </div>
+                  <div class="card-meio">
+                    <div class="card-meio-esq">
+                      <h3>Núm. Série: <span>${bicicleta.numSerie}</span></h3>
+                      <h3>Preço: <span>R$ ${bicicleta.price.toFixed(2)}</span></h3>
+                    </div>
+                    <img src="../img/marcas-bike/linha.png" alt="" class="linha">
+                    <div class="card-meio-dir">
+                      <h3>Ano: <span>${bicicleta.ano}</span></h3>
+                      <h3>Status: <span>${b}</span></h3>
+                    </div>
+                  </div>
+                  <div class="card-imagens">
+                  ${bicicleta.images.map(image => `<img src="${image}" alt="">`).join("")}
+                  </div>
+                </div>
+                </div>
+              </a>
+            `;
+            
+            bicicletasContainer.appendChild(cardBicicleta);
+            })
+              })
+        }).catch(error => {
+          console.error("Ocorreu um erro ao buscar as bicicletas do ciclista:", error);
+        });
+        })
+        .catch(error => {
+          alert("Não foi possível carregar as informações do Ciclista.");
+        });
+    });
+  </script>
+  
 </body>
 </html>

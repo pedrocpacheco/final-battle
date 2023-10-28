@@ -7,40 +7,162 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="logo-fundo">
-    <img src="../img/voltar.png" alt="">
+  <div class="logoFundo">
+    <a href="#" id="linkBiceBlue">
+      <img src="../img/voltar.png" alt="">
+    </a>
   </div>
   <div class="main">
     <div class="bici">
-      <h2>Bicicleta Calloi V3 <span>| 2020</span></h2>
-      <h4>D06T011</h4>
+      <h2>Bicicleta <span class="modelo" id="nome">Calloi V3</span> <span class="ano">| 2020</span></h2>
+      <h4 class="num-serie">D06T011</h4>
       <div class="pessoa">
-        <img src="../img/pessoas/pedro.png" alt="Pedro Pacheco">
-        <h2>Pedro Carvalho Pacheco</h2>
+        <img src="../img/pessoas/pedro.png" class="arredondei" alt="Pedro Pacheco">
+        <h2 class="pessoa-nome">Pedro Carvalho Pacheco</h2>
       </div>
       <p class="desc">Uma bicicleta esportiva com alta performance para atletas profissionais</p>
       <h1 class="preco">R$ 7.900,20</h1>
     </div>
-    <div class="imgs">
-      <h2 class="imgs-titulo">Fotos da Bicicleta</h2>
-      <div class="card-imagens">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-      </div>
+    <div class="mods" id="mods">
     </div>
-    <div class="imgs">
-      <h2 class="imgs-titulo">Fotos das Modificações</h2>
-      <div class="card-imagens">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-        <img src="../img/fotos-bicis/ruim/1.png" alt="">
-      </div>
+        
+    <div class="card-imagens" id="card-imagens">
+      
     </div>
     <div class="bottons">
-      <button class="verde">Aceitar Bicicleta</button>
-      <button class="vermelho">Negar Bicicleta</button>
+      <button class="verde" id="aceitarBicicletaButton">Aceitar Bicicleta</button>
+      <button class="vermelho" id="rejeitarBicicletaButton ">Rejeitar Bicicleta</button>
     </div>
-  </div>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const bicicletaId = urlParams.get("id");
+      const rm = urlParams.get("rm");
+      const logoFundo = document.querySelector(".logoFundo"); 
+      console.log(logoFundo)
+
+      const apiUrl = `http://localhost:8080/bicicletas/${bicicletaId}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(bicicleta => {
+
+          logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.marca}.png)`;
+
+          const biciModelo = document.querySelector(".bici .modelo");
+          const biciAno = document.querySelector(".bici .ano");
+          const biciNumSerie = document.querySelector(".bici .num-serie");
+          const biciPessoaNome = document.querySelector(".bici .pessoa-nome");
+          const biciDesc = document.querySelector(".bici .desc");
+          const biciPreco = document.querySelector(".bici .preco");
+          const cardImagens = document.getElementById("card-imagens");
+
+          biciModelo.textContent = bicicleta.nome;
+          biciAno.textContent = `| ${bicicleta.ano}`;
+          biciNumSerie.textContent = bicicleta.numSerie;
+          biciPessoaNome.textContent = bicicleta.pessoaNome;
+          biciDesc.textContent = bicicleta.descricao;
+          biciPreco.textContent = `R$ ${bicicleta.price.toFixed(2)}`;
+
+          bicicleta.images.forEach(imageUrl => {
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            cardImagens.appendChild(imgElement);
+          });
+
+          apiDono = `http://localhost:8080/ciclistas/id/${bicicleta.ciclistaId}`;
+
+          fetch(apiDono)
+          .then(response => response.json())
+          .then(ciclista => {
+            const nomeCiclita = document.querySelector(".pessoa h2");
+            const fotoCiclita = document.querySelector(".pessoa img");
+            console.log(nomeCiclita);
+
+            nomeCiclita.textContent = ciclista.nome;
+            fotoCiclita.src = `${ciclista.img}`;
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao buscar as informações do ciclista:", error);
+          });
+        })
+        .catch(error => {
+          console.error("Ocorreu um erro ao buscar as informações da bicicleta:", error);
+        });
+
+        const apiUrlAddons = `http://localhost:8080/addons/bicicleta/${bicicletaId}`;
+        console.log(`http://localhost:8080/addons/bicicleta/${bicicletaId}`)
+        const modsContainer = document.getElementById("mods");
+
+        fetch(apiUrlAddons)
+          .then(response => response.json())
+          .then(addons => {
+            addons.forEach(addon => {
+              const modElement = document.createElement("div");
+              modElement.classList.add("mod");
+    
+              modElement.innerHTML = `
+                <img src="${addon.img}" alt="${addon.nome}">
+                <div class="mod-infos">
+                  <h3>${addon.nome}</h3>
+                  <h4>${addon.marca}</h4>
+                  <p>${addon.descricao}</p>
+                  <h2>R$ ${addon.preco.toFixed(2)}</h2>
+                </div>
+              `;
+    
+              modsContainer.appendChild(modElement);
+            });
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao buscar os addons:", error);
+          });
+
+      const aceitarBicicletaButton = document.getElementById("aceitarBicicletaButton");
+      const rejeitarBicicletaButton = document.querySelector(".vermelho");
+
+      rejeitarBicicletaButton.addEventListener("click", function () {
+        fetch(`http://localhost:8080/bicicletas/aceito/${bicicletaId}`, {
+          method: "PUT",
+          body: JSON.stringify({ aceito: false }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            window.location.href = `http://127.0.0.1:5500/selec-fotos/bice-ana.html?rm=${rm}`;
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao aceitar a bicicleta:", error);
+          });
+      });
+
+      aceitarBicicletaButton.addEventListener("click", function () {
+        fetch(`http://localhost:8080/bicicletas/aceito/${bicicletaId}`, {
+          method: "PUT",
+          body: JSON.stringify({ aceito: true }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            window.location.href = `http://127.0.0.1:5500/selec-fotos/bice-ana.html?rm=${rm}`;
+          })
+          .catch(error => {
+            console.error("Ocorreu um erro ao aceitar a bicicleta:", error);
+          });
+      });
+          const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+              event.preventDefault(); 
+              const destinoURL = `../selec-fotos/bice-ana.html?rm=${rm}`;
+              window.location.href = destinoURL;
+            });
+    });
+  </script>
 </body>
 </html>

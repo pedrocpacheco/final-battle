@@ -31,6 +31,8 @@
       <button>Tirar Foto</button>
       <video autoplay></video>
       <canvas></canvas>
+      <input type="file" id="fileInput">
+      <p id="filePath"></p>
     </div>
     <script>
       var video = document.querySelector('video');
@@ -53,6 +55,8 @@
         
         // Converter o conteúdo do canvas em uma imagem base64
         var imageData = canvas.toDataURL('image/png');
+        var url = window.URL.createObjectURL(dataURItoBlob(imageData));
+        console.log(url)
         
         // Criar um elemento de link para download
         var link = document.createElement('a');
@@ -60,6 +64,17 @@
         link.download = 'sua_foto.png'; // Nome do arquivo a ser salvo
         link.click(); // Simular o clique no link para iniciar o download
       });
+
+      function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mimeString });
+}
     </script>
   </main>
   <footer>
