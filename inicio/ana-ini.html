@@ -33,12 +33,14 @@
     document.getElementById("atualizar").addEventListener("click", function () {
       console.log("teste")
       const rm = document.getElementById("rm").value;
-      const apiUrl = `http://localhost:8080/analistas/rm/${rm}`;
+      const apiUrl = `https://backend-bn-production.up.railway.app/analistas/rm/${rm}`;
       fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         const senha = document.getElementById("senha").value;
         if(data.senha != senha){
+          alert(data.senha + " " + senha)
           alert("Senha Incorreta")
           return
         }

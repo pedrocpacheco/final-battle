@@ -33,7 +33,7 @@
     document.getElementById("atualizar").addEventListener("click", function () {
       console.log("teste")
       const cpf = document.getElementById("cpf").value;
-      const apiUrl = `http://localhost:8080/ciclistas/cpf/${cpf}`;
+      const apiUrl = `https://backend-bn-production.up.railway.app/ciclistas/cpf/${cpf}`;
       fetch(apiUrl)
       .then(response => response.json())
       .then(data => {

@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="foto.css">
-  <title>Document</title>
+  <title>Foto Frontal</title>
 </head>
 <body>
   <main>
     <div class="top">
       <div class="botoes">
-        <img class="saida" src="../img/placeholder/saida-white.png" alt="">
-        <img class="fechada" src="../img/placeholder/fechada-white.png" alt="">
+        <a href="#" id="linkBiceBlue">
+          <img class="saida" src="../img/placeholder/saida-white.png" alt="">
+        </a>
+        <a href="#" id="linkBice">
+          <img class="fechada" src="../img/placeholder/fechada-white.png" alt="">
+        </a>
       </div>
       <div class="top-infos">
         <h2>Envio de Fotos Frontal</h2>
@@ -31,10 +35,17 @@
       <button>Tirar Foto</button>
       <video autoplay></video>
       <canvas></canvas>
-      <input type="file" id="fileInput">
-      <p id="filePath"></p>
+      <button  id="avancar">Avançar Proxima Foto</button>
     </div>
     <script>
+
+      function getQueryParam(name) {
+              const urlParams = new URLSearchParams(window.location.search);
+              return urlParams.get(name);
+            }
+  
+      const cpf = getQueryParam("cpf");
+
       var video = document.querySelector('video');
 
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -66,15 +77,37 @@
       });
 
       function dataURItoBlob(dataURI) {
-  var byteString = atob(dataURI.split(',')[1]);
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  var ab = new ArrayBuffer(byteString.length);
-  var ia = new Uint8Array(ab);
-  for (var i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-  return new Blob([ab], { type: mimeString });
-}
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: mimeString });
+      }
+      document.querySelector('#avancar').addEventListener('click', () => {
+        // Extrair o ID da bicicleta da URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+
+        // Construir a URL da próxima página
+        const proximaPaginaURL = `http://127.0.0.1:5500/fotos/foto-2.html?id=${id}&cpf=${cpf}`;
+
+        window.location.href = proximaPaginaURL;
+      });
+      const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            const destinoURL = `../selec-fotos/bice-1.html?cpf=${cpf}`;
+            window.location.href = destinoURL;
+          });
+      const linkBice = document.getElementById("linkBice");
+            linkBice.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            const destinoURL = `../selec-fotos/bice-1.html?cpf=${cpf}`;
+            window.location.href = destinoURL;
+          });
     </script>
   </main>
   <footer>

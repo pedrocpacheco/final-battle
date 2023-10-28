@@ -43,7 +43,7 @@
       const logoFundo = document.querySelector(".logoFundo"); 
       console.log(logoFundo)
 
-      const apiUrl = `http://localhost:8080/bicicletas/${bicicletaId}`;
+      const apiUrl = `https://backend-bn-production.up.railway.app/bicicletas/${bicicletaId}`;
 
       fetch(apiUrl)
         .then(response => response.json())
@@ -72,7 +72,7 @@
             cardImagens.appendChild(imgElement);
           });
 
-          apiDono = `http://localhost:8080/ciclistas/id/${bicicleta.ciclistaId}`;
+          apiDono = `https://backend-bn-production.up.railway.app/ciclistas/id/${bicicleta.ciclistaId}`;
 
           fetch(apiDono)
           .then(response => response.json())
@@ -92,8 +92,8 @@
           console.error("Ocorreu um erro ao buscar as informações da bicicleta:", error);
         });
 
-        const apiUrlAddons = `http://localhost:8080/addons/bicicleta/${bicicletaId}`;
-        console.log(`http://localhost:8080/addons/bicicleta/${bicicletaId}`)
+        const apiUrlAddons = `https://backend-bn-production.up.railway.app/addons/bicicleta/${bicicletaId}`;
+        console.log(`https://backend-bn-production.up.railway.app/addons/bicicleta/${bicicletaId}`)
         const modsContainer = document.getElementById("mods");
 
         fetch(apiUrlAddons)
@@ -124,7 +124,7 @@
       const rejeitarBicicletaButton = document.querySelector(".vermelho");
 
       rejeitarBicicletaButton.addEventListener("click", function () {
-        fetch(`http://localhost:8080/bicicletas/aceito/${bicicletaId}`, {
+        fetch(`https://backend-bn-production.up.railway.app/bicicletas/aceito/${bicicletaId}`, {
           method: "PUT",
           body: JSON.stringify({ aceito: false }),
           headers: {
@@ -141,7 +141,7 @@
       });
 
       aceitarBicicletaButton.addEventListener("click", function () {
-        fetch(`http://localhost:8080/bicicletas/aceito/${bicicletaId}`, {
+        fetch(`https://backend-bn-production.up.railway.app/bicicletas/aceito/${bicicletaId}`, {
           method: "PUT",
           body: JSON.stringify({ aceito: true }),
           headers: {

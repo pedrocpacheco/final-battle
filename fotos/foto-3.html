@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="foto.css">
-  <title>Document</title>
+  <title>Foto Traseira</title>
 </head>
 <body>
   <main>
     <div class="top">
       <div class="botoes">
-        <img class="saida" src="../img/placeholder/saida-white.png" alt="">
-        <img class="fechada" src="../img/placeholder/fechada-white.png" alt="">
+        <a href="#" id="linkBiceBlue">
+          <img class="saida" src="../img/placeholder/saida-white.png" alt="">
+        </a>
+        <a href="#" id="linkBice">
+          <img class="fechada" src="../img/placeholder/fechada-white.png" alt="">
+        </a>
       </div>
       <div class="top-infos">
         <h2>Envio de Fotos Traseira</h2>
@@ -28,11 +32,85 @@
       </ul>
     </div>
     <div class="botao">
-      <button>Abrir a Câmera</button>
+      <button>Tirar Foto</button>
+      <video autoplay></video>
+      <canvas></canvas>
+      <button  id="avancar">Avançar Proxima Foto</button>
     </div>
+    <script>
+      function getQueryParam(name) {
+              const urlParams = new URLSearchParams(window.location.search);
+              return urlParams.get(name);
+            }
+  
+      const cpf = getQueryParam("cpf");
+      const id = getQueryParam("id");
+      var video = document.querySelector('video');
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+        })
+        .catch(error => {
+          console.log(error);
+        })
+
+      document.querySelector('button').addEventListener('click', () => {
+        var canvas = document.querySelector('canvas');
+        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth;
+        var context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0);
+        
+        // Converter o conteúdo do canvas em uma imagem base64
+        var imageData = canvas.toDataURL('image/png');
+        var url = window.URL.createObjectURL(dataURItoBlob(imageData));
+        console.log(url)
+        
+        // Criar um elemento de link para download
+        var link = document.createElement('a');
+        link.href = imageData; // Definir a imagem como URL do link
+        link.download = 'sua_foto.png'; // Nome do arquivo a ser salvo
+        link.click(); // Simular o clique no link para iniciar o download
+      });
+
+      function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: mimeString });
+      }
+      document.querySelector('#avancar').addEventListener('click', () => {
+        // Extrair o ID da bicicleta da URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+
+        // Construir a URL da próxima página
+        const proximaPaginaURL = `http://127.0.0.1:5500/fotos/foto-4.html?id=${id}&cpf=${cpf}`;
+
+        window.location.href = proximaPaginaURL;
+      });
+      const linkBiceBlue = document.getElementById("linkBiceBlue");
+            linkBiceBlue.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            const destinoURL = `http://127.0.0.1:5500/fotos/foto-2.html?id=${id}`;
+            window.location.href = destinoURL;
+          });
+      const linkBice = document.getElementById("linkBice");
+            linkBice.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            const destinoURL = `../selec-fotos/bice-1.html?cpf=${cpf}`;
+            window.location.href = destinoURL;
+          });
+    </script>
   </main>
   <footer>
-    p>DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
+    DEVELOPMENT FOOTAGE (MOBILE). SUBJECT TO CHANGE.
       LAYOUT MAY VARY ACROSS PLATAFORMS.</p>
   </footer>
 </body>

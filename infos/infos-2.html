@@ -41,15 +41,15 @@
       const logoFundo = document.querySelector(".logoFundo"); 
       console.log(logoFundo)
 
-      const apiUrl = `http://localhost:8080/bicicletas/${bicicletaId}`;
+      const apiUrl = `https://backend-bn-production.up.railway.app/bicicletas/${bicicletaId}`;
 
       fetch(apiUrl)
         .then(response => response.json())
         .then(bicicleta => {
           let a = bicicleta.aceito
-          let b = "Opa"
+          let b = "Rejeitada"
           if(a === true){ b = "Aceita" }
-          if(a === false) { b = "Rejeitada"}
+          if(a === false) { b = "Rejeitada" }
           
 
           logoFundo.style.backgroundImage = `url(../img/fundos/${bicicleta.marca}.png)`;
@@ -75,7 +75,7 @@
             cardImagens.appendChild(imgElement);
           });
 
-          apiDono = `http://localhost:8080/ciclistas/id/${bicicleta.ciclistaId}`;
+          apiDono = `https://backend-bn-production.up.railway.app/ciclistas/id/${bicicleta.ciclistaId}`;
 
           fetch(apiDono)
           .then(response => response.json())
@@ -95,8 +95,8 @@
           console.error("Ocorreu um erro ao buscar as informações da bicicleta:", error);
         });
 
-        const apiUrlAddons = `http://localhost:8080/addons/bicicleta/${bicicletaId}`;
-        console.log(`http://localhost:8080/addons/bicicleta/${bicicletaId}`)
+        const apiUrlAddons = `https://backend-bn-production.up.railway.app/addons/bicicleta/${bicicletaId}`;
+        console.log(`https://backend-bn-production.up.railway.app/addons/bicicleta/${bicicletaId}`)
         const modsContainer = document.getElementById("mods");
 
         fetch(apiUrlAddons)
@@ -127,7 +127,7 @@
         enviarFotosButton.addEventListener("click", function () {
           const urlParams = new URLSearchParams(window.location.search);
           const bicicletaId = urlParams.get("id");
-          window.location.href = `http://127.0.0.1:5500/fotos/foto-1.html?id=${bicicletaId}`;
+          window.location.href = `http://127.0.0.1:5500/fotos/foto-1.html?id=${bicicletaId}&cpf=${cpf}`;
         });
 
         const linkBiceBlue = document.getElementById("linkBiceBlue");

@@ -44,7 +44,7 @@
   
       const cpf = getQueryParam("cpf");
       console.log(cpf)
-      const apiUrl = `http://localhost:8080/ciclistas/cpf/${cpf}`;
+      const apiUrl = `https://backend-bn-production.up.railway.app/ciclistas/cpf/${cpf}`;
       console.log(apiUrl)
   
       fetch(apiUrl)
@@ -55,7 +55,7 @@
           const nomeElement = document.querySelector(".infos-top-cima h3");
           logo.src = ciclista.img; 
           nomeElement.textContent = `Olá, ${ciclista.nome}`; 
-          const apiUrlBicicletas = `http://localhost:8080/bicicletas/ciclista/`
+          const apiUrlBicicletas = `https://backend-bn-production.up.railway.app/bicicletas/ciclista/`
           
           fetch(apiUrlBicicletas + ciclista.id)
           .then(response => response.json())
@@ -63,7 +63,7 @@
             const bicicletasContainer = document.getElementById("meio");
             
             bicicletas.forEach(bicicleta => {
-              if(bicicleta.aceito != null && bicicleta.images != null){
+              if(bicicleta.avaliado === true){
                 return
               }
 
