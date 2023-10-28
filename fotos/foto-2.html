@@ -92,14 +92,14 @@
         const id = urlParams.get("id");
 
         // Construir a URL da próxima página
-        const proximaPaginaURL = `http://127.0.0.1:5500/fotos/foto-3.html?id=${id}?cpf=${cpf}`;
+        const proximaPaginaURL = `../fotos/foto-3.html?id=${id}?cpf=${cpf}`;
 
         window.location.href = proximaPaginaURL;
       });
       const linkBiceBlue = document.getElementById("linkBiceBlue");
             linkBiceBlue.addEventListener("click", function (event) {
             event.preventDefault(); 
-            const destinoURL = `http://127.0.0.1:5500/fotos/foto-1.html?id=${id}&cpf=${cpf}`;
+            const destinoURL = `../fotos/foto-1.html?id=${id}&cpf=${cpf}`;
             window.location.href = destinoURL;
           });
       const linkBice = document.getElementById("linkBice");

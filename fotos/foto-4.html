@@ -119,7 +119,7 @@
                     .then(response => {
                       if (response.ok) {
                         
-                        const proximaPaginaURL = `http://127.0.0.1:5500/selec-fotos/bice-2.html?cpf=${cpf}`;
+                        const proximaPaginaURL = `../selec-fotos/bice-2.html?cpf=${cpf}`;
                         window.location.href = proximaPaginaURL;
                       } else {
                         // Lida com erros ou exibe uma mensagem de erro ao usuário
@@ -152,7 +152,7 @@
       const linkBiceBlue = document.getElementById("linkBiceBlue");
             linkBiceBlue.addEventListener("click", function (event) {
             event.preventDefault(); 
-            const destinoURL = `http://127.0.0.1:5500/fotos/foto-3.html?id=${id}&cpf=${cpf}`;
+            const destinoURL = `../fotos/foto-3.html?id=${id}&cpf=${cpf}`;
             window.location.href = destinoURL;
           });
       const linkBice = document.getElementById("linkBice");
